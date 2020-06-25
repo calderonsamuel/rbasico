@@ -6,8 +6,7 @@ Authors@R:
            family = "Calderon",
            role = c("aut", "cre"),
            email = "samuel.calderon@uarm.pe")
-Description: Ejecutar tutoriales interactivos de conceptos básicos de programación
-    en R usando el panel de tutorial en RStudio.
+Description: Ejecutar tutoriales interactivos de conceptos básicos de programación en R usando el panel de tutorial en RStudio.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
