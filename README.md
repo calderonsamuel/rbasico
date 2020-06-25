@@ -1,0 +1,30 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# rbasico
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+EL objetivo de rbasico es contar con tutoriales interactivos de R que se
+puedan ejecutar en el panel de tutorial de RStudio.
+
+## Installation
+
+You can install the released version of rbasico from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("rbasico")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("calderonsamuel/rbasico")
+```
+
+Una vez instalado el paquete simplemente dirígete al panel tutorial en
+RStudio y puedes ejecutar los que desees.
