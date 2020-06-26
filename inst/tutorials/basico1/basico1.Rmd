@@ -4,6 +4,7 @@ description: "Aprender los elementos básicos de la programación con R: crear f
 output: 
   learnr::tutorial:
     progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
 ---
 
@@ -167,7 +168,7 @@ raiz_cubica <- function(x){
 
 ### Raíz n
 
-Al probarel funcionamiento de `raiz_cubica()` vemos que nos arroja el cálculo correcto. Podríamos hacer una función de raíz para cada número, pero como las funciones pueden tener más de un argumento, podemos usar eso para nuestra ventaja y hacer una función que aplique una raiz "n" a cualquier número "x".
+Al probar el funcionamiento de `raiz_cubica()` vemos que nos arroja el cálculo correcto. Podríamos hacer una función de raíz para cada número, pero como las funciones pueden tener más de un argumento, podemos usar eso para nuestra ventaja y hacer una función que aplique una raiz "n" a cualquier número "x".
 
 ```{r raiz_n, exercise=TRUE, exercise.lines=9}
 raiz_n <- function(x, n){
