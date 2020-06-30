@@ -337,7 +337,7 @@ help(today)
 
 Esta función también nos puede brindar información de otros objetos contenidos en R base o paquetes que hemos cargado.
 
-```{r help_}
+```{r help2, exercise=TRUE}
 library(ggplot2)
 
 help(economics)
