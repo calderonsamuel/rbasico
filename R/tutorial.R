@@ -6,9 +6,6 @@
 #' @export
 #'
 tutorial <- function(num){
-  if(num == 1) {
-    learnr::run_tutorial("basico1", "rbasico")
-  } else {
-    stop("Numero de tutorial equivocado")
-  }
+  numero <-  ifelse(num == 1, "basico1", ifelse(num == 2, "basico2", stop("Tutorial no encontrado")))
+    learnr::run_tutorial(numero, "rbasico")
 }
