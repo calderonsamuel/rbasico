@@ -12,9 +12,9 @@ runtime: shiny_prerendered
 library(learnr)
 #library(gradethis)
 knitr::opts_chunk$set(echo = FALSE)
-tutorial_options(exercise.timelimit = 5, 
-                 exercise.completion = FALSE, 
-                 exercise.checker = gradethis::grade_learnr)
+tutorial_options(#exercise.checker = gradethis::grade_learnr,
+                 exercise.timelimit = 5, 
+                 exercise.completion = FALSE)
 ```
 
 <style>
