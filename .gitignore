@@ -1,2 +1,5 @@
 .Rproj.user
 .Rhistory
+rbasico.Rcheck/
+rbasico*.tar.gz
+rbasico*.tgz
