@@ -59,12 +59,12 @@ Podemos ver cómo lucen los operadores en funcionamiento al usarlos en R.
 
 ```
 
-```{r aritmeticos-check, eval=FALSE}
-grade_result(
-  pass_if(x = ~ identical(.result, 148)),
-  correct = "¡Lo hiciste muy bien!",
-  incorrect = "Vuelve a revisar el código"
-)
+```{r aritmeticos-check}
+# grade_result(
+#   pass_if(x = ~ identical(.result, 148)),
+#   correct = "¡Lo hiciste muy bien!",
+#   incorrect = "Vuelve a revisar el código"
+# )
 ```
 
 
