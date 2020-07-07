@@ -10,7 +10,7 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
-library(gradethis)
+#library(gradethis)
 knitr::opts_chunk$set(echo = FALSE)
 tutorial_options(exercise.timelimit = 5, 
                  exercise.completion = FALSE, 
