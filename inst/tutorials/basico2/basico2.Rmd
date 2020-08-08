@@ -3,6 +3,7 @@ title: "Clases, Listas y subsetting"
 output: 
   learnr::tutorial:
     progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
 description: "Aprender el uso de vectores con atributos y subsetting"
 ---
@@ -238,37 +239,54 @@ Del mismo modo en que los operadores aritméticos nos permitían obtener un resu
 
 Los primeros de ellos son los relacionales, y ya los conocemos desde el colegio, pero es bueno saber cómo escribirlos en R. La siguiente tabla nos muestra para qué sirve cada uno de ellos.
 
-|Operador|Uso|
-|-------:|:-----|
-|`>`|Mayor que|
-|`<`|Menor que|
-|`==`|Igual que|
-|`!=`| Diferente que|
-|`>=`|Mayor o igual que|
-|`<=`|Menor o igual que|
+|Operador|Uso              |
+|-------:|:----------------|
+|`>`     |Mayor que        |
+|`<`     |Menor que        |
+|`==`    |Igual que        |
+|`!=`    |Diferente que    |
+|`>=`    |Mayor o igual que|
+|`<=`    |Menor o igual que|
 
-En el siguiente código encuentras ejemplos de cada uno. Al igual que operaciones aritméticas, al comparar una costante esta se recicla.
+En la siguiente sección encuentras ejemplos de cada uno. 
 
-```{r relacionales, exercise=TRUE}
-secuencia <- 1:10
+### Usando operadores relacionales
 
+Empecemos por definir una secuencia del 1 al 6 con la cual vamos a hacer nuestras comparaciones.
+
+```{r secuencia_echo, echo=TRUE}
+secuencia <- 1:6
+```
+
+Primero vamos a utilizar los operadores de igualdad y desigualdad. Tengamos en cuenta que al igual que con las operaciones aritméticas, al comparar una costante, esta se recicla. 
+
+```{r secuencia}
+secuencia <- 1:6
+```
+
+
+```{r relacionales-igualdad, exercise=TRUE, exercise.setup="secuencia"}
 # igual que
-secuencia == 10
+secuencia == 6
 
 # diferente que
-secuencia != 10
+secuencia != 6
+```
 
+Obtenemos los resultados de las comparaciones. En aquellos valores que cumplan la condición, obtenemos un valor `TRUE`. Vemos que sucede lo mismo cuando usamos los demás operadores relacionales.
+
+```{r relacionales-mayor-menor, exercise=TRUE, exercise.setup="secuencia"}
 # mayor que
-secuencia > 5
+secuencia > 4
 
 # menor que
-secuencia < 5
+secuencia < 4
 
 # mayor o igual que
-secuencia >= 5
+secuencia >= 4
 
 # menor o igual que
-secuencia <= 5
+secuencia <= 4
 ```
 
 Ten cuidado al comparar vectores *character* con *numericos* porque pueden devolver resultados inesperados. No olvides que operar con un `NA` siempre devolverá `NA`. 
@@ -277,25 +295,31 @@ Ten cuidado al comparar vectores *character* con *numericos* porque pueden devol
 
 Para potenciar nuestras habilidades de comparación, podemos hacer uso de operadores lógicos. La siguiente tabla te muestra cuáles son:
 
-|Operador|Uso|
-|-------:|:-----|
-|`&`|Y lógico|
-|`|`|O lógico|
-|`!`|NO lógico|
+|Operador|Uso      |
+|-------:|:--------|
+|`&`     |Y lógico |
+|`|`     |O lógico |
+|`!`     |NO lógico|
 
-Aquí los podemos ver en acción:
+Usaremos una secuencia un poco más larga para ver mejor cómo usarlos:
+
+```{r secuencia2, echo=TRUE}
+secuencia2 <- 1:8
+```
+
+```{r logicos-setup}
+secuencia2 <- 1:8
+```
 
 ```{r logicos, exercise=TRUE}
-secuencia2 <- 1:15
+# Y lógico: el número debe ser mayor que tres Y menor que 6
+secuencia2 > 3 & secuencia2 < 6
 
-# Y lógico: el número debe ser mayor que cinco Y menor que 10
-secuencia2 > 5 & secuencia2 < 10
-
-# O lógico: el número debe ser menor que cinco O mayor que 10
-secuencia2 < 5 | secuencia2 > 10
+# O lógico: el número debe ser menor que tres O mayor que 6
+secuencia2 < 3 | secuencia2 > 6
 
 # NO lógico: cambia el valor de la operación
-! secuencia2 <= 10
+! secuencia2 <= 6
 ```
 
 ## Tema 6: Subsetting

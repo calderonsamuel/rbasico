@@ -10,11 +10,11 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
-library(gradethis)
+#library(gradethis)
 knitr::opts_chunk$set(echo = FALSE)
-tutorial_options(exercise.timelimit = 5, 
-                 exercise.completion = FALSE, 
-                 exercise.checker = gradethis::grade_learnr)
+tutorial_options(#exercise.checker = gradethis::grade_learnr,
+                 exercise.timelimit = 5, 
+                 exercise.completion = FALSE)
 ```
 
 <style>
@@ -58,15 +58,15 @@ Podemos ver cómo lucen los operadores en funcionamiento al usarlos en R.
 
 
 ```
-<!--
+
 ```{r aritmeticos-check}
-grade_result(
-  pass_if(x = ~ identical(.result, 148)),
-  correct = "¡Lo hiciste muy bien!",
-  incorrect = "Vuelve a revisar el código"
-)
+# grade_result(
+#   pass_if(x = ~ identical(.result, 148)),
+#   correct = "¡Lo hiciste muy bien!",
+#   incorrect = "Vuelve a revisar el código"
+# )
 ```
--->
+
 
 ### Quiz aritmético
 
@@ -437,6 +437,11 @@ typeof(mi_vector_muy_largo)
 
 Crear vectores más largos puede tener efectos inesperados para el usuario que no está atento. Veamos el siguiente ejemplo:
 
+```{r vector_combinado-setup}
+mi_vector_muy_largo <- c(1:6, 11:16, 21:26)
+```
+
+
 ```{r vector_combinado, exercise=TRUE}
 vector_combinado <- c(mi_vector_muy_largo, "1")
 
@@ -532,18 +537,22 @@ R no es capaz de asignar un valor numérico a `"sustantivo"` y como resultado no
 
 Debemos ser extremadamente cuidadosos al trabajar con ellos, porque pueden generar algunos problemas indeseados. Por ejemplo, si queremos obtener la suma de todos los elementos de un vector, usando la función `sum()`, y resulta que uno de ellos es un `NA`.
 
-```{r vector_con_NA, echo=TRUE}
+```{r vector_NA, echo=TRUE}
 vector_con_NA <- c(1, 2, 3, 4, NA, 6, 7)
 ```
 
 
-```{r sum-con-na, exercise=TRUE}
+```{r vector_con_NA}
+vector_con_NA <- c(1, 2, 3, 4, NA, 6, 7)
+```
+
+```{r sum-con-na, exercise=TRUE, exercise.setup="vector_con_NA"}
 sum(vector_con_NA)
 ```
 
 El resultado obtenido es simplemente `NA`. El mismo problema se extiende al querer obtener un promedio usando la función `mean()`.
 
-```{r mean-con-na, exercise=TRUE}
+```{r mean-con-na, exercise=TRUE, exercise.setup="vector_con_NA"}
 mean(vector_con_NA)
 ```
 
@@ -551,7 +560,7 @@ mean(vector_con_NA)
 
 Felizmente, estas funciones permiten proporcionar el argumento `na.rm = TRUE` para ignorar los valores `NA` y trabajar sólo con valores válidos.
 
-```{r na-rm, exercise=TRUE}
+```{r na-rm, exercise=TRUE, exercise.setup="vector_con_NA"}
 sum(vector_con_NA, na.rm = TRUE)
 mean(vector_con_NA, na.rm = TRUE)
 ```
@@ -568,20 +577,28 @@ Son dados cuyos números no tienen una probabilidad equitativa de ser obtenidos.
 
 ### Indicaciones
 
-El proyecto se realiza en un R script dentro de RStudio. Una vez finalizado, debe ser enviado al repositorio en Github del participante del taller a través de un "Push".
+El proyecto se realiza en un R script dentro de RStudio. Puedes crearlo siguiendo desde el menú:  
+
+```
+File > New File > R Script
+```
+
+No olvides guardar tu R Script para poder revisar su contenido más adelante. Recomendamos el nombre "Proyecto dados cargados".
 
 1. Revisa los argumentos o páginas de ayuda de las funciones `sample()` y `rep()`. ¿Cuáles son sus argumentos por defecto?
-2. Crea un vector `dado_normal` que contenga los seis lados de un dado normal. Tú decides qué *tipo* de vector sería el más adecuado.
-3. Utiliza la función `sample()` y `dado_normal` para simular el lanzamiento de unos dados.
-4. Crea un vector `dado_cargado` que tenga los seis lados de un lado normal, pero con diferentes proporciones. Puedes utilizar `rep()` en el proceso.
-5. Crea una función `lanzar_dado()` que tome como argumento único un vector `dado_*` y devuelva una frase indicando el número obtenido a través de un uso de `sample()`. Por ejemplo: "Lanzaste el dado y obtuviste el número X". La función `paste()`que ya conoces, te ayudará a obtener la frase.
+2. Crea un vector `mis_letras` obteniendo cinco letras aleatorias del vector predefinido `letters`. Recuerda que este contiene las 26 letras del alfabeto en minúsculas. Debes lograrlo usando la función `sample()`.
+3. Crea un vector `mis_repeticiones` obteniendo 100 repeticiones de tu nombre. Debes lograrlo usando la función `rep()` y su argumento `times`.
+4. Crea un vector `dado_normal` que contenga los seis lados de un dado normal. Tú decides qué *tipo* de vector sería el más adecuado.
+5. Utiliza la función `sample()` y `dado_normal` para simular el lanzamiento de unos dados.
+6. Crea un vector `dado_cargado` que tenga los seis lados de un lado normal, pero con diferentes proporciones. Por ejemplo, podría contener una secuencia del uno al cinco y luego cinco repeticiones del número seis. Puedes utilizar `rep()` en el proceso.
+7. Crea una función `lanzar_dado()` con un argumento único llamado `dado`. Esta función simulará un lanzamiento de cualquier dado que proporciones. Prueba que tu función actúe adecuadamente usándola con tus vectores `dado_normal` y `dado_cargado`. 
+8. Crea una función `dado_frase()` con un argumento único llamado `dado`. Esta función utilizará internamente `lanzar_dado()` para simular el lanzamiento de `dado` y devolverá una frase indicando el número obtenido. Por ejemplo: "Lanzaste el dado y obtuviste el número X". Utiliza la función `paste()` para crear la frase. Nuevamente, verifica su funcionamiento al utilizarla con `dado_normal` y `dado_cargado`.
 
 Opcional
 
-- Crea `lanzar_dados()` de tal modo que devuelva el resultado de dos lanzamientos. Por ejemplo: "Lanzaste dos dados y obtuviste los números X y Y".
-- Crea `lanzar_dado_cargado()`, una función sin argumentos que retorne el número resultado de tirar un dado cargado sin crear antes ningún vector. (Es posible hacerlo usando el argumento `prob` de la función `sample()`)
+1. Crea `lanzar_dados()` de tal modo que devuelva el resultado de dos lanzamientos. Por ejemplo: "Lanzaste dos dados y obtuviste los números X y Y".
+2. Crea `lanzar_dado_cargado()`, una función sin argumentos que retorne el número resultado de tirar un dado cargado sin crear antes ningún vector. (Es posible hacerlo usando el argumento `prob` de la función `sample()`)
 
-***
 
 [^1]: Definición obtenida de https://es.wikipedia.org/wiki/R_(lenguaje_de_programaci%C3%B3n)
 [^2]: RStudio es un Entorno de desarrollo integrado (IDE) para R. Para instalar ambos, recomendamos seguir las instrucciones del punto 1.4.1 y 1.4.2 del siguiente enlace https://es.r4ds.hadley.nz/introducci%C3%B3n.html
