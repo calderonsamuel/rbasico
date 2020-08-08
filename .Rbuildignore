@@ -7,4 +7,4 @@
 ^rbasico\.Rcheck$
 ^rbasico.*\.tar\.gz$
 ^rbasico.*\.tgz$
-^inst/tutorials/Dataframes/Dataframes\.Rmd$
+#^inst/tutorials/Dataframes/Dataframes\.Rmd$
