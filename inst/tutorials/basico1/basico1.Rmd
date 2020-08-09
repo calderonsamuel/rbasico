@@ -1,5 +1,5 @@
 ---
-title: "Funciones y paquetes"
+title: "Operadores, Vectores, Funciones y paquetes"
 description: "Aprender los elementos básicos de la programación con R: crear funciones y cargar paquetes."
 output: 
   learnr::tutorial:
