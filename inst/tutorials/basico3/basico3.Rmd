@@ -1,5 +1,5 @@
 ---
-title: "Sesión 3"
+title: "Dataframes, tibbles y dplyr"
 output: 
   learnr::tutorial:
     progressive: true
