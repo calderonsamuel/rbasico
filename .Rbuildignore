@@ -8,3 +8,4 @@
 ^rbasico.*\.tar\.gz$
 ^rbasico.*\.tgz$
 #^inst/tutorials/Dataframes/Dataframes\.Rmd$
+#inst/tutorials/basico4/basico4\.Rmd$
