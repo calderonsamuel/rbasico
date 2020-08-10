@@ -1,0 +1,59 @@
+---
+title: "La gramática de los gráficos"
+description: "Aprender las reglas de la gramática de los gráficos usando ggplot2"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+<style>
+.tutorialTitle {
+text-align: left}
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introducción
+
+La habilidad de crear gráficos a partir de los datos que recolectamos potencia nuestra capacidad de análisis. Los gráficos nos pueden ayudar a percibir de manera rápida patrones de comportamiento en nuestra data y, al mismo tiempo, resumir de manera visual aquello que queremos mostrar a nuestra audiencia.
+
+Este tutorial tiene como objetivo explicar el uso de la gramática de los gráficos, un marco conceptual cuya aplicación permite realizar visualizaciones de datos de manera sencilla y coherente. No vamos a buscar explicar todos los elementos teóricos que existen detrás del marco conceptual mencionado. En cambio, preferimos explicar sólo los elementos clave, usando ejemplos claros para que, al finalizar el tutorial, cualquiera pueda intentar crear sus propios gráficos.
+
+No somos las primeras personas en tratar de explicar este tema. De hecho, este tutorial será una adaptación del gran trabajo realizado por [Chester Ismay](https://chester.rbind.io/) y [Albert Y. Kim](https://rudeboybert.rbind.io/) en su libro [*Statistical Inference via Data Science: A ModernDive into R and the Tidyverse*](https://moderndive.com/2-viz.html).
+
+El paquete `ggplot2`, elaborado por [Hadley Wickham](http://hadley.nz/) es la implementanción en R de la gramática de los gráficos, teoría desarrollada por [Leland Wilkinson](https://www.cs.uic.edu/~wilkinson/). Puedes cargar `ggplot2` individualmente o junto con los paquetes del `tidyverse`.
+
+```{r library, eval=FALSE, echo=TRUE}
+# Sólo ggplot2
+library(ggplot2)
+
+# Todo el tidyverse
+library(tidyverse)
+```
+
+## Tema 1: La gramática
+
+Del mismo modo que para construir una oración en nuestro idioma, hacemos uso de combinaciones de palabras (que pueden ser sustantivos, verbos, adjetivos, etc)  siguiendo un conjunto de reglas conocido como *gramática*, la *gramática de los gráficos* nos brinda las reglas para contruir gráficos estadísticos. 
+
+### Componentes de la gramática
+
+En pocas palabras, la gramática de los gráficos nos quiere decir que:
+
+> Un gráfico estadístico es el **mapeo** de variables en nuestra **data** hacia  atributos **estéticos** de figuras **geométricas**. 
+
+Básicamente, podemos construir un gráfico a partir de tres componentes esenciales:
+
+1. `data`: el set de datos que contiene las variables de interés
+2. `geom`: las figuras geométricas en cuestión. Nos referimos al tipo de objeto que podemos observar en un gráfico. Por ejemplo: puntos, líneas o barras. 
+3. `aes`: los atributos estéticos de la figura geométrica. Por ejemplo, su posición en los ejes x/y, color, forma y tamaño. Los atributos estéticos son *mapeados* a las variables contenidas en nuestro set de datos. 
+
+### Un breve ejemplo
+
+Para mostrar lo simple que puede resultar graficar 
