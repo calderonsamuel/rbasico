@@ -17,6 +17,8 @@ text-align: justify}
 
 ```{r setup, include=FALSE}
 library(learnr)
+library(tidyverse)
+library(gapminder)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -56,4 +58,61 @@ Básicamente, podemos construir un gráfico a partir de tres componentes esencia
 
 ### Un breve ejemplo
 
-Para mostrar lo simple que puede resultar graficar 
+Para mostrar lo simple que puede resultar graficar usando los componentes mencionados, usaremos datos del paquete `gapminder`. Para este primer ejemplo utilizaremos sólo los datos de expectativa de vida en Perú a lo largo de los años. Para ello crearemos `df_ejemplo`.
+
+```{r df_ejemplo, echo=TRUE}
+library(gapminder)
+library(dplyr)
+
+df_ejemplo <- gapminder %>% 
+  select(country, year, lifeExp) %>% 
+  filter(country == "Peru")
+```
+
+Ahora que tenemos `df_ejemplo`, sólo necesitamos usar dos líneas de código para ver la evolución de la expectativa de vida de los peruanos. Recuerda que para ello hemos cargado previamente `ggplot2`.
+
+```{r plot_ex1, exercise=TRUE}
+# Ejecuta este código para realizar tu primer gráfico
+ggplot(data = df_ejemplo, mapping = aes(x = year, y = lifeExp)) +
+  geom_line()
+```
+
+¿Cómo funciona la gramática? Anteriormente te habíamos mencionado que `ggplot` requiere tres componentes básicos para crear gráficos: los datos, el mapeo de variables y las figuras geométricas que representarán nuestros datos. En el código de arriba, le indicamos a la función `ggplot()` que nuestra *data* será `df_ejemplo`, con *mapping* le pedimos que mapee la variable `year` al eje *X* y la variable `lifeExp` al eje *Y*. Además de hacer esto, es necesario indicarle qué figura geométrica debe usar `ggplot` para representar nuestros datos. Esta instrucción se la indicamos con `geom_line()`, pidiendole que lo haga con una línea.
+
+### ggplot conciso
+
+Debido a que el primer argumento siempre será nuestra data, y en el mapeo de variables los dos primeros atributos siempre corresponden al eje *X* y al eje *Y*, podemos reescribir el código del gráfico anterior de forma más concisa.
+
+```{r plot_ex2, exercise = TRUE}
+ggplot(df_ejemplo, aes(year, lifeExp)) + 
+  geom_line()
+```
+
+### Puedo usar pipes
+
+No sólo eso. Recuerda que podemos usar el operador *pipe* para realizar una secuencia de pasos en nuestro análisis siempre y cuando el primer argumento de nuestra función requiera datos, como ocurre con `ggplot`. ¡Esto quiere decir que no era obligatorio crear primero `df_ejemplo`!. 
+
+```{r plot_ex3, exercise = TRUE}
+gapminder %>% 
+  select(country, year, lifeExp) %>% 
+  filter(country == "Peru") %>% 
+  ggplot(aes(year, lifeExp)) + 
+  geom_line()
+```
+
+¡Pero no te confíes! Date cuenta que para agregar elementos después de la función `ggplot()`, hacemos uso del operador de suma y no de *pipes*.
+
+## Los cinco gráficos nombrados
+
+### Gráfico de líneas
+
+### Gráfico de barras
+
+### Diagrama de dispersión
+
+### Histogramas
+
+### Diagramas de caja o boxplot
+
+
+
