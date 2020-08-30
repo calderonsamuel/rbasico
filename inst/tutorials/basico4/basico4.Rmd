@@ -30,6 +30,8 @@ Este tutorial tiene como objetivo explicar el uso de la gramática de los gráfi
 
 No somos las primeras personas en tratar de explicar este tema. De hecho, este tutorial será una adaptación del gran trabajo realizado por [Chester Ismay](https://chester.rbind.io/) y [Albert Y. Kim](https://rudeboybert.rbind.io/) en su libro [*Statistical Inference via Data Science: A ModernDive into R and the Tidyverse*](https://moderndive.com/2-viz.html).
 
+## Tema 1: La gramática
+
 El paquete `ggplot2`, elaborado por [Hadley Wickham](http://hadley.nz/) es la implementanción en R de la gramática de los gráficos, teoría desarrollada por [Leland Wilkinson](https://www.cs.uic.edu/~wilkinson/). Puedes cargar `ggplot2` individualmente o junto con los paquetes del `tidyverse`.
 
 ```{r library, eval=FALSE, echo=TRUE}
@@ -40,8 +42,6 @@ library(ggplot2)
 library(tidyverse)
 ```
 
-## Tema 1: La gramática
-
 Del mismo modo que para construir una oración en nuestro idioma, hacemos uso de combinaciones de palabras (que pueden ser sustantivos, verbos, adjetivos, etc)  siguiendo un conjunto de reglas conocido como *gramática*, la *gramática de los gráficos* nos brinda las reglas para contruir gráficos estadísticos. 
 
 ### Componentes de la gramática
@@ -50,7 +50,7 @@ En pocas palabras, la gramática de los gráficos nos quiere decir que:
 
 > Un gráfico estadístico es el **mapeo** de variables en nuestra **data** hacia  atributos **estéticos** de figuras **geométricas**. 
 
-Básicamente, podemos construir un gráfico a partir de tres componentes esenciales:
+Podemos construir un gráfico a partir de tres componentes esenciales:
 
 1. `data`: el set de datos que contiene las variables de interés
 2. `geom`: las figuras geométricas en cuestión. Nos referimos al tipo de objeto que podemos observar en un gráfico. Por ejemplo: puntos, líneas o barras. 
@@ -71,7 +71,13 @@ df_ejemplo <- gapminder %>%
 
 Ahora que tenemos `df_ejemplo`, sólo necesitamos usar dos líneas de código para ver la evolución de la expectativa de vida de los peruanos. Recuerda que para ello hemos cargado previamente `ggplot2`.
 
-```{r plot_ex1, exercise=TRUE}
+```{r df_ejemplo_setup}
+df_ejemplo <- gapminder %>% 
+  select(country, year, lifeExp) %>% 
+  filter(country == "Peru")
+```
+
+```{r plot_ex1, exercise=TRUE, exercise.setup="df_ejemplo_setup"}
 # Ejecuta este código para realizar tu primer gráfico
 ggplot(data = df_ejemplo, mapping = aes(x = year, y = lifeExp)) +
   geom_line()
@@ -83,16 +89,16 @@ ggplot(data = df_ejemplo, mapping = aes(x = year, y = lifeExp)) +
 
 Debido a que el primer argumento siempre será nuestra data, y en el mapeo de variables los dos primeros atributos siempre corresponden al eje *X* y al eje *Y*, podemos reescribir el código del gráfico anterior de forma más concisa.
 
-```{r plot_ex2, exercise = TRUE}
+```{r plot_ex2, exercise = TRUE, exercise.setup="df_ejemplo_setup"}
 ggplot(df_ejemplo, aes(year, lifeExp)) + 
   geom_line()
 ```
 
 ### Puedo usar pipes
 
-No sólo eso. Recuerda que podemos usar el operador *pipe* para realizar una secuencia de pasos en nuestro análisis siempre y cuando el primer argumento de nuestra función requiera datos, como ocurre con `ggplot`. ¡Esto quiere decir que no era obligatorio crear primero `df_ejemplo`!. 
+No sólo eso. Recuerda que podemos usar el operador *pipe* para realizar una secuencia de pasos en nuestro análisis siempre y cuando el primer argumento de nuestra función requiera datos, como ocurre con `ggplot`. ¡Esto quiere decir que no era obligatorio crear primero `df_ejemplo`!
 
-```{r plot_ex3, exercise = TRUE}
+```{r plot_ex3, exercise = TRUE, exercise.setup="df_ejemplo_setup"}
 gapminder %>% 
   select(country, year, lifeExp) %>% 
   filter(country == "Peru") %>% 
