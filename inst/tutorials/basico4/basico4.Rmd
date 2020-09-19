@@ -110,13 +110,47 @@ gapminder %>%
 
 ## Los cinco gráficos nombrados
 
+Con el fin de conseguir una explicación simple, nos limitamos a mostrar cinco tipos de gráfico que son de uso común y que además permiten entender los usos de la gramática en su forma básica.
+
+### Gráfico de barras o columnas
+
+El primer tipo de gráfico que veremos es el de barras. Resulta muy útil para mostrar la frecuencia de aparición de nuestros datos categóricos. Por ejemplo, podemos ver cuántos países encontramos por continente en las observaciones de `gapminder` correspondientes al año 2002. Podemos obtener esa información usando `dplyr`.
+
+```{r paises, echo=TRUE}
+gapminder %>% 
+  filter(year == 2002) %>% 
+  group_by(continent) %>% 
+  summarise(recuento = n()) %>% 
+  ungroup()
+```
+
+Con esta información, podemos dibujar nuestro primer gráfico de barras haciendo uso de `geom_col()`. Usaremos el còdigo anterior para no tener que crear un nuevo objeto.
+
+```{r geom_col, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2002) %>% 
+  group_by(continent) %>% 
+  summarise(recuento = n()) %>% 
+  ungroup() %>% 
+  ggplot(aes(continent, recuento)) +
+  geom_col()
+```
+
+Realizar un gráfico de barras con el recuento de observaciones según categorías es tan común, que `ggplot2` incluye una función que nos evita tener que hacer el recuento manualmente. Esta vez crearemos el mismo gráfico usando `geom_bar()`, sin tener que hacer nuestro `recuento` primero.
+
+```{r geom_bar}
+gapminder %>% 
+  filter(year == 2002) %>% 
+  ggplot(aes(continent)) +
+  geom_bar()
+```
+
+
 ### Gráfico de líneas
 
-### Gráfico de barras
+### Histogramas
 
 ### Diagrama de dispersión
-
-### Histogramas
 
 ### Diagramas de caja o boxplot
 
