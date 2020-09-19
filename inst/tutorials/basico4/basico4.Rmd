@@ -19,6 +19,7 @@ text-align: justify}
 library(learnr)
 library(tidyverse)
 library(gapminder)
+library(coronavirus)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -138,21 +139,112 @@ gapminder %>%
 
 Realizar un gráfico de barras con el recuento de observaciones según categorías es tan común, que `ggplot2` incluye una función que nos evita tener que hacer el recuento manualmente. Esta vez crearemos el mismo gráfico usando `geom_bar()`, sin tener que hacer nuestro `recuento` primero.
 
-```{r geom_bar}
+```{r geom_bar, exercise=TRUE}
 gapminder %>% 
   filter(year == 2002) %>% 
   ggplot(aes(continent)) +
   geom_bar()
 ```
 
-
 ### Gráfico de líneas
+
+El siguiente tipo de gráfico ya lo conocemos. Consiste en líneas que nos sirven generalmente para analizar la evolución en el tiempo de determinadas variables. Debido a ello, es muy común mapear en el exe *X* alguna variable de tiempo, y en el eje *Y* alguna variable cuantitativa, que sería nuestra variable de interés. 
+
+Con `gapminder` podemos analizar la evolución del PBI per cápita peruano de 1952 a 2007. Para ello filtraremos sólo las observaciones pertenecientes a Perú. Para generar el gráfico de líneas usamos `geom_line()`.
+
+```{r geom_line_1, exercise=TRUE}
+gapminder %>% 
+  filter(country == "Peru") %>% 
+  ggplot(aes(year, gdpPercap)) +
+  geom_line()
+```
+
+¿En qué periodo se ve una gran caída? ¿Cuántos años fueron necesarios para recuperar la misma cifra? Este tipo de preguntas son las que un gráfico de líneas nos permite revisar.
 
 ### Histogramas
 
-### Diagrama de dispersión
+Es posible hacer otro tipo de análisi usando una sola variable. El gráfico de barras nos mostraba cómo se distribuyen las observaciones de nuestras variables categóricas. Podemos esperar que exista un gráfico que nos muestre la distribución de variables numéricas. 
+
+Esto lo conseguimos con los histogramas.En lugar de mostrar la frecuencia de observaciones según *categorías*, nos permiten agrupar los datos por *intervalos*. Veamos cómo se distribuye el PBI per cápita de todos los países del mundo en el año 2007. Para generar el histograma usamos `geom_histogram()`. Por defecto, `ggplot()` divide nuestra data en 30 intervalos.
+
+```{r geom_histogram, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_histogram()
+```
+
+Con esto podemos responder alguna preguntas como:
+
+- ¿Cuál es el valor más pequeño?¿Y el más alto?
+- ¿Cuál es el valor "central" o "más típico"?
+- ¿Qué tan dispersos están los valores?
+- ¿Qué valores son muy frecuentes?¿Cuáles son infrecuentes?
 
 ### Diagramas de caja o boxplot
+
+Otra manera de ver la distribución de nuestros valores es haciendo uso de diagramas de caja o *boxplot*. En este caso, es más entenderlo si primero hemos visto alguno. Para dibujarlo, usamos `geom_boxplot()`. 
+
+```{r geom_boxplot1, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap)) +
+  geom_boxplot()
+```
+
+Lo primero que vemos es una especie de "caja" que busca representar nuestros valores. La línea negra remarcada al centro de la caja nos indica dónde encontramos el punto medio de nuestros datos (la mediana). Esta representación nos permite ubicar nuestros datos en cuatro segmentos importantes:
+
+1. Todo lo que está "fuera" de la caja en el lado izquierdo representa el primer 25% de nuestros datos, también conocido como el primer cuartil o cuartil inferior. Son  los valores más bajos.
+2. Todo lo que está en la primera mitad de la "caja" representa el segundo 25% de nuestros datos, conocido el segundo cuartil.
+3. Todo lo que está en la segunda mitad de la "caja" representa el tercer 25% de nuestros datos, conocido como el tercer cuartil.
+4. Todo lo que está "fuera" de la caja en el lado derecho, representa el cuarto 25% de nuestros datos, también conocido como el cuarto cuartil o cuartil superior. Son los valores más altos.
+
+Habrás podido notar que además aparecen algunos puntos dibujados fuera de nuestros cuatro segmentos. Estos representan valores extremos, también conocidos como *outliers*. Pueden aparecer tanto en el lado más alto como en el más bajo de nuestros datos. Para determinar su existencia se utiliza un cálculo usando el Rango Intercuartil. Si no entiendes esta parte por ahora, no te preocupes, con que entiendas que son valores extremos es suficiente. 
+
+Algo muy útil que nos permiten hacer los *boxplot* es comparar la distribución de nuestros valores entre diferentes categorías. Por ejemplo, el PBI per cápita entre lo cinco continentes.
+
+```{r geom_boxplot2, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap, continent)) +
+  geom_boxplot()
+```
+
+De esta manera, podemos ver que incluso los valores más altos de PBI en África no alcanzan a los valores medianos de Europa y Oceanía. También podemos ver que aunque Asia tiene países con valores de PBI per cápita comparables con los más altos de Europa, al menos la mitad de sus países se ubica en los niveles de África. 
+
+### Diagrama de dispersión
+
+Además de ver las características de una variable en particular, ya sea viendo su evolución en el tiempo o su distribución, podemos pensar en cómo analizar la relación *entre* nuestras variables. Por ejemplo, ¿qué relación existe entre el PBI per cápita y la expectativa de vida? Piensa un poco en esto y trata de responder la siguiente pregunta: ¿Existirá mayor expectativa de vida en países que tienen un PBI per cápita alto?
+
+Para responder a esto podemos hacer uso de un diagrama de dispersión, también conocido como *diagrama de puntos*. Nos sirve para ver la relación existente entre dos variables, también conocida como **correlación**. 
+
+A continuación, analizaremos la relación entre el PBI per cápita y la expectativa de vida de todos los países en el año 2007. Para dibujar nuestro diagrama de puntos, hacemos uso de `geom_point()`. Las variables de interés van en cada uno de nuestros ejes. En este caso, como esperamos que el PBI per cápita influya en la epectativa de vida, lo colocamos en el eje *X*. Cada uno de los puntos de nuestro gráfico corresponde a un país. 
+
+```{r geom_point1, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap, lifeExp)) +
+  geom_point()
+```
+
+Algo que podemos notar rápidamente es que existen gran cantidad de países con un PBI per cápita bajo, esto hace que haya mucha aglomeración en esa parte del gráfico. Aunque esto nos dificulta un poco el análisis, podemos ir respondiendo la siguiente pregunta: ¿La expectativa de vida en los países con mayor PBI per cápita es alta o baja?
+
+Para ver la distribución en los países con menor PBI per cápita podemos filtrar sólo los valores menores a 10000.
+
+```{r geom_point2, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007, gdpPercap < 10000) %>% 
+  ggplot(aes(gdpPercap, lifeExp)) +
+  geom_point()
+```
+
+Nuevamente, podemos ver que los países con mayor PBI per cápita tienen la expectativa de vida más alta. Sin embargo, ahora además podemos ver con mayo claridad que aunque en los países con menor PBI per cápita la expectativa de vida es variada, generalmente se encuentra en los valores más bajos.
+
+## Ejercicios
+
+```{r exercise1}
+
+```
 
 
 
