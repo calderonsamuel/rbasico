@@ -18,4 +18,5 @@ Remotes:
     rstudio-education/gradethis
 Imports: 
     gapminder,
-    learnr
+    learnr,
+    coronavirus

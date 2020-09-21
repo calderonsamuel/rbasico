@@ -21,6 +21,8 @@ library(tidyverse)
 library(gapminder)
 library(coronavirus)
 knitr::opts_chunk$set(echo = FALSE)
+
+# coronavirus <- refresh_coronavirus_jhu()
 ```
 
 ## Introducción
@@ -109,7 +111,7 @@ gapminder %>%
 
 ¡Pero no te confíes! Date cuenta que para agregar elementos después de la función `ggplot()`, hacemos uso del operador de suma y no de *pipes*.
 
-## Los cinco gráficos nombrados
+## Tema 2: Los cinco gráficos nombrados
 
 Con el fin de conseguir una explicación simple, nos limitamos a mostrar cinco tipos de gráfico que son de uso común y que además permiten entender los usos de la gramática en su forma básica.
 
@@ -242,7 +244,15 @@ Nuevamente, podemos ver que los países con mayor PBI per cápita tienen la expe
 
 ## Ejercicios
 
-```{r exercise1}
+El set de datos `coronavirus` del paquete `coronavirus` contiene datos actualizados acerca de la evolución del COVID-19 a nivel mundial. 
+
+1. Usa funciones explorativas para encontrar información relevante sobre el set de datos (puedes usar `str()`, `summary()`, `head()`, `unique()`). Con esto debes ser capaz de contestar las siguientes preguntas:
+    - ¿Para cuántos países tenemos disponible la información?
+    - ¿Cuál es la unidad de tiempo que tenemos disponible en las observaciones?
+    - ¿Qué tipo de casos están contemplados en el set de datos?
+
+```{r exercise1, exercise=TRUE}
+
 
 ```
 
