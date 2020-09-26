@@ -256,5 +256,104 @@ El set de datos `coronavirus` del paquete `coronavirus` contiene datos actualiza
 
 ```
 
+## Tema 3: Color, relleno, tamaño y forma
 
+Hasta el momento hemos conocido cómo cambiar en nuestras geometrías los atributos estéticos de posición en los ejes *X* y *Y*. Sin embargo, cuando pensamos tradicionalmente en atributos estéticos, hay otro tipo de características que también nos vienen a la mente. Tres de ellas pueden ser el color, tamaño y forma de las figuras geométricas que utilizamos en nuestros gráficos. Con `ggplot2` podemos mapear alguna variable de nuestro set de datos a estos atributos.
+
+### Color y relleno
+
+Pensemos en un gráfico de barras. Habíamos visto que es posible crearlo usando `geom_bar()`. Por ejemplo, la cantidad de países en cada continente para el año 2007.
+
+```{r color1, exercise = TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(continent)) +
+  geom_bar()
+```
+
+El gráfico nos permite identificar una columna con cada uno de los continentes, pero para ello es necesario leer las etiquetas en el eje *X*. Otra manera de saber que estamos refiriéndonos a continentes distintos es haciendo uso del atributo `fill`, que se refiere al relleno de las barras.
+
+```{r color2, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(continent, fill = continent)) +
+  geom_bar()
+```
+
+Vemos que además de colorear cada una de nuestras barras, `ggplot2` automáticamente le agrega una leyenda a nuestro  gráfico para saber qué categoría representa cada color mostrado. En un gráfico de barras, esta información ya la presentaban las etiquetas del eje *X*.
+
+Para poder apreciar cómo el color nos puede apreciar a explotar nuestros datos, agreguémosle color de relleno a un diagrama de puntos. Recordemos que para ello hacemos uso de `geom_point()`. Por ejemplo, para ver la relación entre PBI per cápita y esperanza de vida en el año 2007. Haciendo uso del color, podemos ver cómo se posicionan los países según su continente.
+
+```{r color3, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap, lifeExp, color = continent)) +
+  geom_point()
+```
+
+Podemos seguir viendo que existe una relación positiva entre PBI per cápita y expectativa de vida, pero además ahora podemos ver a qué continente pertecen los países con PBI per cápita más alto y más bajo.
+
+Sin embargo, te habrás dado cuenta que para el código de barras hemos usado el argumento `fill` pero en el diagram de puntos hemos usado `color`. 
+
+¿Por qué la diferencia? Tiene que ver con la figura geométrica que estamos utilizando. Por lo general debemos entenderlo de la siguiente manera:
+
+- `fill`: permite modificar el relleno de la figura.
+- `color`: permite modificar los bordes o líneas de la figura.
+
+### Tamaño
+
+Del mismo, usar el atributo de tamaño nos permite identificar nueva información acerca de nuestros datos. Por ejemplo, podemos ver la población de los países en nuestro diagrama de puntos para hacernos una idea de a quiénes representa. Para ello, usamos el argumento `size` y lo mapeamos a la variable `pop`.
+
+```{r size1, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap, lifeExp, size = pop)) +
+  geom_point()
+```
+
+Nuevamente, `ggplot2` nos proporciona una leyenda automática. Así podemos ver que para el año 2007, los países con los valores de población más extremos, tienen un PBI per cápita bajo. Podemos combinar al mismo tiempo el uso de tamaño con el color para ver también la distribución según continentes. 
+
+```{r size2, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap, lifeExp, size = pop, color = continent)) +
+  geom_point()
+```
+
+- ¿Qué punto crees que representa a China?
+- ¿Qué punto crees que representa a EEUU?
+- ¿Qué punto crees que representa a Australia?
+
+### Forma
+
+Debes tener en cuenta que no todo el mundo percibe los colores de la misma manera. En casos como esos, usar una forma distinta para nuestras categorías permite mostrar con mayor claridad las diferencias. Para ello, usamos el atributo `shape`.
+
+```{r shape1, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap, lifeExp, shape = continent, color = continent)) +
+  geom_point()
+```
+
+## Tema 4: Etiquetas
+
+Por último, usar etiquetas significativas hará que nuestros gráficos hablen por sí solos. Para ello, agregamos la función `labs()` a nuestro gráfico. En ella, entre otras cosas, podemos modificar lo siguiente:
+
+- `title`: el título principal de nuestro gráfico
+- `subtitle`: el subtítulo del gráfico
+- `caption`: la nota al pie de nuestro gráfico
+- `x`: la etiqueta del eje *X*
+- `y`: la etiqueta del eje *Y*
+
+```{r labs1, exercise=TRUE}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot(aes(gdpPercap, lifeExp, shape = continent, color = continent)) +
+  geom_point() +
+  labs(title = "Relación entre PBI per cápita y expectativa de vida",
+       subtitle = "Los cinco continentes en el año 2007",
+       caption = "Fuente: Proyecto gapminder",
+       x = "PBI per cápita",
+       y = "Expectativa de Vida")
+```
 
