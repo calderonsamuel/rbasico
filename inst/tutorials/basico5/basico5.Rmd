@@ -39,7 +39,7 @@ En esta parte del tutorial vas a aprender cómo se escribe cierto contenido en f
 
 Para ello, va a ser necesario que dentro de RStudio generes un archivo Rmarkdown. Puedes hacerlo desde el menú:
 
-´File`> `New File` > `R Markdown...` > `Create Empty Document`
+> File > New File > R Markdown... > Create Empty Document
 
 Esto te abrirá un archivo completamente en blanco desde el cual puedes ir probando 
 
