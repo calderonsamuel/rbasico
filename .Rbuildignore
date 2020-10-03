@@ -9,3 +9,4 @@
 ^rbasico.*\.tgz$
 #^inst/tutorials/Dataframes/Dataframes\.Rmd$
 #inst/tutorials/basico4/basico4\.Rmd$
+#^inst/tutorials/basico5/basico5\.Rmd$

@@ -1,0 +1,173 @@
+---
+title: "Rmarkdown"
+description: "Aprender formato básico de markdown y ejecución de código R"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{=html}
+<style>
+.tutorialTitle {
+text-align: left}
+body {
+text-align: justify}
+</style>
+```
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(gapminder)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introducción
+
+Ahora que ya conoces cómo analizar tus datos y sintetizarlos en gráficos, se hace necesario que te empieces preguntar a través de qué herramientas puedes dar a conocer tus hallazgos. Típicamente podrías pensar que una buena manera es realizar un informe, nota periodística, artículo o entrada en un blog. ¿Cómo llevarías todo lo que produjiste en R?
+
+Probablemente se te esté ocurriendo realizar tu redacción en un programa de procesamiento de textos, como Microsoft Word o Google Docs. No es mala idea, sin embargo, RStudio nos brinda \*\*Rmarkdown\* como herramienta alternativa para permanecer en el ecosistema de R.
+
+Debido a que inicialmente nos brinda mayor facilidad para publicaciones en formato web, vamos a ver de qué forma *Rmarkdown* podría ser ventajoso.
+
+## Tema 1: Un poquito de html
+
+HTML es el lenguaje con el que se escribe el contenido de la web. Todas las veces que utilizas tu navegador, lo que este internamente hace es recibir contenido en formato html e interpretarlo para que no tengas que ver el códgio que hay detrás. De esa manera en lugar de tener que aprender a escribir contenido en la web para poder acceder a ella, simplemente puedes recibir el contenido de forma muy accesible.
+
+En esta parte del tutorial vas a aprender cómo se escribe cierto contenido en formato html.
+
+Para ello, va a ser necesario que dentro de RStudio generes un archivo Rmarkdown. Puedes hacerlo desde el menú:
+
+´File`> `New File` > `R Markdown...` > `Create Empty Document`
+
+Esto te abrirá un archivo completamente en blanco desde el cual puedes ir probando 
+
+### Tags de título
+
+La manera en que HTML brinda formato al contenido es a través de las *tags* (o etiquetas). La mayoría de ellas rodea el contenido para saber donde empieza y termina. Por ejemplo, las que indican que cierto texto es un título.
+
+-   `<h1>`...`</h1>`: Indica título de primer nivel
+-   `<h2>`...`</h2>`: Indica título de segundo nivel
+-   `<h3>`...`</h3>`: Indica título de tercer nivel
+-   `<h4>`...`</h4>`: Indica título de cuarto nivel, y así sucesivamente.
+
+Así, cuando escribimos esto en un editor html:
+
+```
+<h1>Mi primer código html</h1>
+<h2>Esto sería un título de segundo nivel</h2>
+<h3>Y este uno de tercer nivel</h3>
+<h2>Pero puedo tener varios de cada nivel</h2>
+```
+
+Obtenemos lo siguiente:
+
+<h1>Mi primer código html</h1>
+<h2>Esto sería un título de segundo nivel</h2>
+<h3>Y este uno de tercer nivel</h3>
+<h2>Pero puedo tener varios de cada nivel</h2>
+
+### Tag de párrafo
+
+Para texto, la unidad básica es el párrafo. Lo podemos generar con la etiqueta `<p>`...`</p>`. Podemos ir mezclando ya con las etiquetas de título.
+
+Usando estos elementos:
+
+```
+<h1>Aprendiendo HTML</h1>
+<h2>Lo básico</h2>
+<p>Es posible generar párrafos de texto</p>
+<p>Los párrafos pueden ir uno después del otro. No es necesario generar usar una etiqueta de párrafo por cada oración</p>
+<p>Entre párrafo y párrafo aparece por defecto un pequeño espacio de separación.</p>
+```
+
+Se genera:
+
+<h1>Aprendiendo HTML</h1>
+<h2>Lo básico</h2>
+<p>Es posible generar párrafos de texto</p>
+<p>Los párrafos pueden ir uno después del otro. No es necesario generar usar una etiqueta de párrafo por cada oración.</p>
+<p>Entre párrafo y párrafo aparece por defecto un pequeño espacio de separación.</p>
+
+### Tags de énfasis de texto
+
+Algunas veces en nuestro texto necesitamos darle énfasis a ciertas palabras o frases. Para ello podemos recurrir a las etiquetas de **negrita** o *cursiva*.
+
+- `<strong>`...`</strong>`: Para generar negritas.
+- `<em>`...`</em>`: Para generar cursivas.
+
+Así, al usar este código:
+
+```
+<p>No todo lo que escribo tiene el mismo énfasis. <em>Ciertas palabras</em> requieren ser diferenciadas. </p>
+<p>Cuando escribo en HTML muchas veces pueda usar etiquetas <em>dentro</em> de otras etiquetas. Como ahora que usé <strong>strong</strong> y <strong>em</strong> dentro de <strong>p</strong>.</p>
+```
+
+Genero:
+
+<p>No todo lo que escribo tiene el mismo énfasis. <em>Ciertas palabras</em> requieren ser diferenciadas. </p>
+<p>Cuando escribo en HTML muchas veces pueda usar etiquetas <em>dentro</em> de otras etiquetas. Como ahora que usé <strong>strong</strong> y <strong>em</strong> dentro de <strong>p</strong>.</p>
+
+### Tags de lista
+
+Puedo necesitar hacer un listado de elementos. Algunas listas tienen números y otras sólo necesitan viñetas. Para iniciar debo usar:
+
+- `<ol>`: Cuando necesito numeración
+- `<ul>`: Cuando no necesito numeración
+
+Sin embargo, si quiero agregar un elemento a mi lista debo usar `<li>`...`</li>` por cada elemento. No debo olvidar cerrar mi lista con la etiqueta correspondiente:
+
+- `</ol>`: Para cerrar una lista numerada
+- `</ul>`: Para cerrar una lista no umerada
+
+De esta manera, puedo usar el siguiente código:
+
+```
+<h2>Ventajas de una lista numerada</h2>
+<ol>
+<li>Los números aparecen automáticamente.</li>
+<li>Le da jerarquía a mis elementos.</li>
+<li>Pueden seguir creciendo cada vez.</li>
+</ol>
+<h2>Ventajas de una lista no numerada</h2>
+<ul>
+<li>No debo preocuparme por el orden de mis elementos.</li>
+<li>También pueden crecer y crcer.</li>
+</ul>
+```
+
+Para generar lo siguiente:
+
+<h2>Ventajas de una lista numerada</h2>
+<ol>
+<li>Los números aparecen automáticamente.</li>
+<li>Le da jerarquía a mis elementos.</li>
+<li>Pueden seguir creciendo cada vez.</li>
+</ol>
+<h2>Ventajas de una lista no numerada</h2>
+<ul>
+<li>No debo preocuparme por el orden de mis elementos.</li>
+<li>También pueden crecer y crcer.</li>
+</ul>
+
+### Otros tags
+
+- Hipervínculo con `<a>`...`</a>`
+- Insertar imagen con `<img>`
+- Insertar código con `<pre>`...`</pre>`
+
+## Tema 2: Markdown
+
+### Títulos
+
+### Énfasis
+
+### Listas
+
+### Imágenes e hipervínculo
+
+### Código
+
+## Tema 3: Rmarkdown
+
