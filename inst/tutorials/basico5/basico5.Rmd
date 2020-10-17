@@ -151,23 +151,293 @@ Para generar lo siguiente:
 <li>También pueden crecer y crcer.</li>
 </ul>
 
-### Otros tags
+### Hipervínculo
 
-- Hipervínculo con `<a>`...`</a>`
-- Insertar imagen con `<img>`
-- Insertar código con `<pre>`...`</pre>`
+Al crear mi contenido web, es posible que quiera enlazarlo a contenido existente en alguna otra parte de internet. Ya sea contenido en mi propia página web o en algún sitio conocido, como Wikipedia, resulta muy útil tener la capacidad de hacer este tipo de enlaces.
+
+La etiqueta `<a>` me ayuda con esto. El texto que se encuentre rodeado por ella, servirá como enlace a una dirección web. Sin embargo, necesito también especificar a qué dirección web deseo enlazarme. Para ello, hago uso del argumento `href` dentro de mi etiqueta de apertura. Con un ejemplo se entenderá mejor.
+
+Escribiendo:
+
+```
+En <a href="https://www.w3schools.com">W3 Schools</a> puedes encontrar tutoriales para todas las etiquetas de html.
+```
+Generamos:
+
+En <a href="https://www.w3schools.com">W3 Schools</a> puedes encontrar tutoriales para todas las etiquetas de html.
+
+### Imágenes
+
+Para insertar imágenes, podemos usar la etiqueta `<img>`. Algo peculiar de esta etiqueta es que no necesita una etiqueta de cierre. Esto es porque no hay necesidad de rodear texto con ella. Sin embargo, sí necesitamos hacer uso de sus argumentos.
+
+- `src`: para indicar la fuente o ubicación de la imagen que queremos referenciar.
+- `alt`: para indicar el texto alternativo a la imagen, que se presentará si por algún motivo la imagen no se puede presentar.
+- `width`: para definir el ancho de la imagen en pixeles.
+- `height`: para definir el alto de la imagen en pixeles.
+
+Ten en cuenta que html no necesita comas (`,`) entre sus argumentos.
+
+Con esto, si usamos la etiqueta de la siguiente manera.
+
+```
+<img src="https://cdn.pixabay.com/photo/2015/06/08/15/02/pug-801826_960_720.jpg" alt="Un pug envuelto en una manta" width="600" height="400">
+```
+Generamos la siguiente imagen:
+
+<img src="https://cdn.pixabay.com/photo/2015/06/08/15/02/pug-801826_960_720.jpg" alt="Un pug envuelto en una manta" width="600" height="400">
+
+Ten en cuenta los derechos de autor de las imágenes que uses en tu contenido web. En caso contrario, podrías enfrentarte a problemas innecesarios. Para este tutorial hemos usado fotos libres de [pixabay](https://pixabay.com/es/users/free-photos-242387/).
+
+### Bloques de código
+
+La última etiqueta de html que vamos a aprender en este tutorial es la de insertar bloques de código usando la etiqueta `<pre>`. A este tipo de formato también se le conoce como *texto preformateado*, porque utiliza un formato por defecto. Nos permite presentar todo el contenido tal y como está escrito dentro del documento original. Esto es especialmente útil para comunicar el procedimiento que se realiza en un flujo de análisis de datos. 
+
+En efecto, todos los bloques en los que hemos ido mostrando la escritura html han hecho uso de este tipo de bloques de código. Pero es posible utilizar cualquier lenguaje dentro de los bloques.
+
+Por ejemplo, podemos usar código R:
+
+```
+<pre>
+# Cargando paquetes
+library(tidyverse)
+
+df <- read_csv("tabla_de_datos.csv")
+
+print(df)
+</pre>
+```
+Lo que nos genera:
+
+<pre>
+# Cargando paquetes
+library(tidyverse)
+
+df <- read_csv("tabla_de_datos.csv")
+
+print(df)
+</pre>
+
+Más adelante vamos a aprender una manera de sacarle mayor provecho a los bloques de código.
 
 ## Tema 2: Markdown
 
+Markdown se introduce como un formato para generar contenido html de manera simplificada. Nos va a permitir incluso darnos una idea de cómo se vería el contenido final desde el formato original. 
+
+Vamos a conocer cómo se genera en markdown el contenido que hemos aprendido a generar con html puro.
+
+### Párrafo
+
+El primer tipo de formato a conocer es el párrafo. Recuerda que en html necesitas rodear el texto de `<p>`...`</p>` para indicar que lo que está al interior pertenece a un párrafo. Markdown simplifica la escritura asumiendo que cada línea nueva es un párrafo. De esta manera, no necesitas ningún tipo de formato para escribir párrafos. Sin embargo, sí es necesario tener una línea en blanco entre párrafo y párrafo.
+
+Con esto texto:
+
+```
+Markdown hace las cosas más simples. Para hacer un párrafo no necesito ningún tipo de formato manual. Simplemente puedo empezar a escribir sin preocuparme.
+Pero debo tener cuidado.
+A pesar de que mis oraciones estén en diferentes líneas, Markdown no asumirá que pertenecen a párrafos distintos.
+
+Para estar seguro de que mi texto está en un nuevo párrafo, debe dejar una línea en blanco entre mi párrafo anterior y el nuevo.
+
+Puedo seguir creando párrafos siempre y cuando siga esa simple regla. Mi texto se ve más limpio y no necesito ninguna etiqueta para generarlo.
+```
+
+Se genera;
+
+Markdown hace las cosas más simples. Para hacer un párrafo no necesito ningún tipo de formato manual. Simplemente puedo empezar a escribir sin preocuparme.
+Pero debo tener cuidado.
+A pesar de que mis oraciones estén en diferentes líneas, Markdown no asumirá que pertenecen a párrafos distintos.
+
+Para estar seguro de que mi texto está en un nuevo párrafo, debe dejar una línea en blanco entre mi párrafo anterior y el nuevo.
+
+Puedo seguir creando párrafos siempre y cuando siga esa simple regla. Mi texto se ve más limpio y no necesito ninguna etiqueta para generarlo.
+
 ### Títulos
+
+Las etiquetas de título son reemplazadas por el símbolo numeral (`#`). Para indicar el nivel de título que queremos, basta con agregar la cantidad de numerales necesarios.
+
+- `#`: Para títulos de nivel 1 (reemplaza a `<h1>`)
+- `##`: Para títulos de nivel 2 (reemplaza a `<h2>`)
+- `###`: Para títulos de nivel 3 (reemplaza a `<h3>`), etc.
+
+De esta manera, al usar este formato:
+
+```
+# Título principal
+## Tema 1
+### Subtema 1
+### Subtema 2
+## Tema 2
+```
+
+Se genera:
+
+<h1>Título principal</h1>
+<h2>Tema 1</h2>
+<h3>Subtema 1</h3>
+<h3>Subtema 2</h3>
+<h2>Tema 2</h2>
 
 ### Énfasis
 
+Nuevamente vamos a enfocarnos en dos tipos de énfasis que podemos darle a nuestro texto. Con markdown también va a ser necesario rodear el texto entero al que queremos darle énfasis, de tal manera que markdown pueda saber qué porción del texto enfatizar.
+
+- `*`...`*`: Para cursiva o itálica
+- `**`...`**`: Para negrita
+
+Con este texto:
+
+```
+Con markdown puedo generar de manera sencilla varios tipos de énfasis. Puedo usar las negritas para enfatizar **conceptos nuevos** y las itálicas para indicar relaciones *entre* estos conceptos. No solo eso, puedo combinar ambos tipos de énfasis para darle ***mayor fuerza*** a algo específico que quiero comunicar.
+```
+Genera lo siguiente:
+
+Con markdown puedo generar de manera sencilla varios tipos de énfasis. Puedo usar las negritas para enfatizar **conceptos nuevos** y las itálicas para indicar relaciones *entre* estos conceptos. No solo eso, puedo combinar ambos tipos de énfasis para darle ***mayor fuerza*** a algo específico que quiero comunicar.
+
 ### Listas
 
-### Imágenes e hipervínculo
+Generar listas en markdown resulta muy intuitivo. Si quiero una lista ordenada debo usar números seguidos de un punto, y si quiero una lista no ordenada uso guiones. Ten en cuenta que cada elemento de la lista debe ser precedido por un espacio y estar en una nueva línea.
+
+Con el texto:
+
+```
+Para hacer listas en markdown:
+
+1. Debo dejar una línea en blanco antes de iniciar la lista y después de terminarla.
+2. Debo escribir cada elemento en una nueva línea
+3. Cada elemento debe ir precedido de un espacio, de esta manera markdown entiende que mis números o guiones no tienen un significado especial dentro del texto.
+
+Puedo hacer dos tipos de lista
+
+- Listas ordenadas o numeradas. Requieren usar números seguidos de un punto al inicio de la línea.
+- Listas no ordenadas. Requieren usar un guión al inicio de la línea.
+```
+Genero lo siguiente
+
+Para hacer listas en markdown:
+
+1. Debo tomar en cuenta la existencia de algún tipo de jerarquía en sus elementos
+2. Debo escribir cada elemento en una nueva línea
+3. Cada elemento debe ir precedido de un espacio, de esta manera markdown entiende que mis números o guiones no tienen un significado especial dentro del texto.
+
+Puedo hacer dos tipos de lista
+
+- Listas ordenadas o numeradas. Requieren usar números seguidos de un punto al inicio de la línea.
+- Listas no ordenadas. Requieren usar un guión al inicio de la línea.
+
+### Hipervínculo
+
+Para insertar hipervínculo necesitamos rodear de corchetes (`[...]`) el texto a enlazar, seguidamente rodeando de paréntesis(`(...)`) el enlace al cual queremos redireccionar. Con un ejemplo se entenderá mejor.
+
+Usando el siguiente formato:
+
+```
+Wikipedia es como una enciclopedia en la red. Puedes encontrar contenido casi sobre cualquier tema que te imagines. Incluso puedes encontrar contenido sobre la misma [Wikipedia](https://es.wikipedia.org/wiki/Wikipedia).
+```
+
+Podemos generar:
+
+Wikipedia es como una enciclopedia en la red. Puedes encontrar contenido casi sobre cualquier tema que te imagines. Incluso puedes encontrar contenido sobre la misma [Wikipedia](https://es.wikipedia.org/wiki/Wikipedia).
+
+### Imágenes
+
+Insertar imágenes puede hacerse de manera similar a insertar hipervínculo. En este caso, es necesario usar un símbolo de exclamación (`!`) antes del corchete para indicar que será una imagen.
+
+Con el siguiente formato:
+
+```
+![](https://cdn.pixabay.com/photo/2016/02/19/11/53/pug-1210025_960_720.jpg)
+```
+
+Insertamos la siguiente imagen:
+
+![](https://cdn.pixabay.com/photo/2016/02/19/11/53/pug-1210025_960_720.jpg)
+
+Verás que aunque es más directo, no tenemos disponibles los argumentos de texto alternativo o tamaño de imagen como sí teníamos en html. En este punto es importante entender que markdown prioriza la simplicidad sobre la precisión abosluta.
 
 ### Código
 
+Por último, la inserción de bloques de código con markdown también es bastante sencilla. En este caso, necesitamos intercambiar tanto la etiqueta de apertura como la de cierre por tres acentos graves (```` ``` ````), conocidos también como *backticks*.
+
+De esta manera, si usamos el siguiente formato:
+
+<pre>
+```
+# Generando un data.frame
+data <- data.frame(x = 1:10, y = x^2)
+
+print(data)
+```
+</pre>
+
+Obtenemos:
+
+```
+# Generando un data.frame
+data <- data.frame(x = 1:10, y = x^2)
+
+print(data)
+```
+
+### Bloque de código de lenguaje específico
+
+Respecto a los bloques de código, no pareciera que markdown tenga una ventaja real sobre html original. Sin embargo, markdown tiene un as bajo la manga: nos permite indicar en qué lenguaje estamos escribiendo nuestro código y le aplica un formato diferenciado. 
+
+Basta con usar la abreviatura del lenguaje después de los *backticks* de apertura:
+
+<pre>
+```r
+# Generando un data.frame
+data <- data.frame(x = 1:10, y = (1:10)^2, z = "Hola mundo")
+
+print(data)
+```
+</pre>
+
+Nos sirve para generar:
+
+```r
+# Generando un data.frame
+data <- data.frame(x = 1:10, y = (1:10)^2, z = "Hola mundo")
+
+print(data)
+```
+
+Podemos ver que los números, cadenas de texto y comentarios tienen un formato distinto. Incluso el bloque de código tiene un color de fondo diferenciado. Debido a esto, markdown es el formato preferido por miles de analistas para compartir su código en la web.
+
 ## Tema 3: Rmarkdown
 
+Hasta este punto, esperamos que el tutorial te haya convencido de que trabajar con markdown te simplificará el flujo de trabajo y que debes preferirlo por sobre html puro. Con un poco de práctica y hábito, podrás empezar a ller documentos escritos en markdown puro, sin necesidad incluso de convertirlo primero a html.
+
+Entonces, ¿qué falta por decir? ¿Qué le falta a markdown para ser el formato de comunicación perfecto?
+
+### ¿Cómo compartir el resultado de mi trabajo?
+
+Cuando tengas necesidad de compartir tu trabajo aún queda un problema al que enfrentarte. Si bien markdown te permite compartir tu metodología, incluyendo el código que utilizo, ¿cómo puedes compartir tus resultados? 
+
+Es en este punto donde el aporte extra de Rmarkdown brilla. Además de compartir tu código, con Rmarkdown puedes ejecutarlo de tal manera que el *output* de tu código pase a ser parte de tu documento html.
+
+### Bloques de código ejecutables
+
+De manera muy similar a cuando le indicamos a markdown que cierto bloque de código le pertenece a cierto lenguaje, podemos indicarle a Rmarkdown que ese bloque debe ser ejecutado. Para ello, basta con rodear la abreviatura del lenguaje entre llaves (`{}`).
+
+Por ejemplo, si reutilizamos el código de la sección anterior:
+
+````markdown
+`r ''````{r}
+# Generando un data.frame
+data <- data.frame(x = 1:10, y = (1:10)^2, z = "Hola mundo")
+
+print(data)
+```
+````
+
+Obtenemos:
+
+```{r, echo=TRUE}
+# Generando un data.frame
+data <- data.frame(x = 1:10, y = (1:10)^2, z = "Hola mundo")
+
+print(data)
+```
+
+No sólo obtenemos el texto con el formato deseado, sino que inmediatamente después obtenemos el output.
