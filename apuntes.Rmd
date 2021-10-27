@@ -1,0 +1,470 @@
+---
+title: "Elementos básicos de R"
+author: "Samuel Calderon"
+date: "1/6/2021"
+output: html_document
+---
+
+# Operadores aritméticos
+
+```{r}
+1994 + 27
+```
+
+```{r}
+28 / 365 * 100
+```
+
+```{r}
+2 ** 3
+```
+
+```{r}
+(((1+2)*3)**2)/3
+```
+
+```{r}
+1+2*3**2/3
+```
+
+# Operador de asignación
+
+```{r}
+resultado <- (((1+2)*3)**2)/3
+```
+
+```{r}
+resultado
+```
+
+# Actualizar valor asignado
+
+```{r}
+resultado <- resultado + 3
+```
+
+```{r}
+resultado
+```
+
+```{r}
+resultado2 <- resultado + resultado
+```
+
+```{r}
+resultado2
+```
+
+
+```{r}
+resultado3 <- resultado2 - resultado
+```
+
+```{r}
+resultado3
+```
+
+```{r}
+resultado4 <- resultado3 * resultado
+```
+
+```{r}
+resultado3 <- 10
+```
+
+```{r}
+resultado4
+```
+
+```{r}
+resultado5 <- resultado3 * resultado
+```
+
+```{r}
+resultado5
+```
+
+```{r}
+resultado4 <- "hola"
+```
+
+```{r}
+resultado4
+```
+
+# Vectores
+
+```{r}
+v_logical <- TRUE
+v_double <- 3.1416
+v_integer <- 5L
+v_character <- "Hola mundo"
+```
+
+## Comprobar tipo
+
+```{r}
+is.logical(v_logical)
+```
+
+```{r}
+is.numeric(v_double)
+```
+
+```{r}
+is.integer(v_double)
+```
+
+```{r}
+is.double(TRUE)
+```
+
+```{r}
+is.integer(10)
+```
+
+```{r}
+is.double(10)
+```
+
+
+```{r}
+test <- is.integer(10)
+```
+
+```{r}
+test
+```
+
+## Comprobar tipo alternativo
+
+```{r}
+typeof(v_character)
+```
+
+```{r}
+typeof(v_integer)
+```
+
+```{r}
+typeof(TRUE)
+```
+
+```{r}
+test_tipo <- typeof(1L)
+```
+
+```{r}
+test_tipo
+```
+
+
+```{r}
+is.character(typeof(is.character(typeof(test_tipo))))
+```
+
+```{r}
+typeof("double")
+```
+
+
+1. "3.1415": "character"
+2. FALSE: "logical"
+3. 1 + 10: "double"
+4. 142365L: "integer"
+
+
+```{r}
+nuevo_test <- 1+10
+typeof(1 + 10)
+typeof(11)
+typeof(nuevo_test)
+```
+
+```{r}
+typeof(1L + 10L)
+```
+
+```{r}
+typeof(typeof(1 + 10))
+```
+
+## Vectores con más de un elemento
+
+```{r}
+letters
+```
+
+```{r}
+length(v_logical)
+```
+
+```{r}
+length(letters)
+```
+
+```{r}
+mi_vector_largo <- c("elemento1", 
+                     "elemento2", 
+                     "elemento3", 
+                     "elemento4")
+```
+
+```{r}
+mi_vector_largo2 <- c("elemento1", "elemento2", "elemento3", "elemento4")
+```
+
+```{r}
+mi_vector_largo
+```
+
+```{r}
+mi_vector_largo2
+```
+
+```{r}
+mi_vector_largo3 <- c(mi_vector_largo, mi_vector_largo2)
+```
+
+```{r}
+mi_vector_largo3
+```
+
+## Operador de secuencia simple
+
+```{r}
+mi_vector_numerico1 <- 1:6
+
+mi_vector_numerico1
+```
+
+```{r}
+typeof(mi_vector_numerico1)
+```
+
+
+## Concatenar vectores largos
+
+```{r}
+mi_vector_numerico2 <- 11:16
+
+mi_vector_muy_largo <- c(mi_vector_numerico1, 
+                         mi_vector_numerico2, 
+                         21:26)
+
+mi_vector_muy_largo
+```
+
+```{r}
+mi_vector_muy_largo2 <- c(1:6, 11:16, 21:26)
+
+mi_vector_muy_largo2
+```
+
+```{r}
+typeof(mi_vector_muy_largo)
+```
+
+
+## Ejercicio
+
+secuencia del 100 al 200
+
+```{r}
+mi_secuencia <- 100:200
+```
+
+```{r}
+mi_secuencia
+```
+
+¿Qué tipo de vector se formó con esa secuencia?
+
+```{r}
+typeof(mi_secuencia)
+```
+
+Crear vector de nombres
+
+Crea un vector en el que cada elemento es una parte de tu nombre completo. Por ejemplo:
+
+```{r}
+mi_nombre <- c("Samuel", "Enrique", "Calderon", "Serrano")
+```
+
+```{r}
+typeof(mi_nombre)
+```
+
+
+
+# Operaciones con vectores
+
+
+```{r}
+mi_secuencia1 <- 1:10
+mi_secuencia2 <- 11:20
+```
+
+```{r}
+mi_secuencia1
+mi_secuencia2
+```
+
+
+```{r}
+length(mi_secuencia1)
+length(mi_secuencia2)
+```
+
+```{r}
+mi_secuencia1 + mi_secuencia2
+```
+
+```{r}
+mi_secuencia2 - mi_secuencia1
+```
+
+```{r}
+mi_secuencia1 * mi_secuencia2
+```
+
+## Reciclaje de vectores
+
+
+```{r}
+mi_secuencia1
+```
+
+
+```{r}
+mi_secuencia1 + 1
+mi_secuencia1 * 5
+mi_secuencia1 ** 2
+```
+
+
+## Coerción de vectores
+
+```{r}
+mi_vector_muy_largo
+```
+
+```{r}
+vector_combinado <- c(mi_vector_muy_largo, "1")
+```
+
+```{r}
+typeof(vector_combinado)
+```
+
+```{r}
+vector_combinado
+```
+
+
+```{r}
+typeof(mi_vector_muy_largo)
+```
+
+## Coerción explícita
+
+```{r}
+vector_true_integer <- as.integer(TRUE)
+```
+
+
+```{r}
+typeof(vector_true_integer)
+```
+
+```{r}
+vector_true_integer
+```
+
+
+```{r}
+as.character(TRUE)
+```
+
+```{r}
+as.logical("TRUE")
+```
+
+```{r}
+as.integer("10")
+```
+
+```{r}
+as.integer(5.0)
+```
+
+```{r}
+as.double("6.108")
+```
+
+## Coerción puede perder información
+
+```{r}
+as.integer(5.4234)
+```
+
+```{r}
+as.integer(5.99999)
+```
+
+```{r}
+as.double(as.integer(5.4234))
+```
+
+```{r}
+as.logical(8)
+```
+
+```{r}
+as.logical(-0.000000135)
+```
+
+```{r}
+as.logical(0)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
